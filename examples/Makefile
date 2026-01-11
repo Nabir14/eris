@@ -1,6 +1,6 @@
 all: clean compile run
 clean:
-	rm -rf space
+	rm -rf space eris.o input.o scene.o
 compile:
 	g++ -c ../src/eris.cpp -o eris.o -lSDL3
 	g++ -c ../src/core/scene_manager.cpp -o scene.o -lSDL3
