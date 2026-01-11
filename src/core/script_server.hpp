@@ -9,6 +9,7 @@ extern "C" {
 
 #include <any>
 #include <functional>
+#include <cstdarg>
 
 namespace ScriptServer {
     class ScriptServer {
@@ -20,8 +21,9 @@ namespace ScriptServer {
         void executeScript();
         void exposeData(const char* alias, std::any value);
         void exposeFunction(const char* name, lua_CFunction function);
-        void getFunctionReturn(const char* alias);
-        void getData(const char* alias);
+        std::any callFunction(const char* alias);
+        std::any ScriptServer::callFunction(const char* alias, int arg_count, ...);
+        std::any getData(const char* alias);
         void close();
 
         private:

@@ -40,6 +40,17 @@ namespace ScriptServer {
         lua_setglobal(this->LuaState, alias);
     }
 
+    std::any ScriptServer::callFunction(const char* alias) {
+        lua_getglobal(this->LuaState, alias);
+        std::any value = lua_tostring(this->LuaState, lua_gettop(this->LuaState));
+    }
+
+    std::any ScriptServer::callFunction(const char* alias, int arg_count, ...) {
+        
+        lua_getglobal(this->LuaState, alias);
+        std::any value = lua_tostring(this->LuaState, lua_gettop(this->LuaState));
+    }
+
     void ScriptServer::close() {
         lua_close(this->LuaState);
     }
