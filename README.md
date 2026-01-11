@@ -1,2 +1,2 @@
-# xenon
-Xenon Is An Open Source Game Library
+# Eris
+Eris Is An Open Source Game Library
