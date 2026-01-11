@@ -4,34 +4,48 @@
 #include <iostream>
 
 namespace SceneManager {
-    Scene::Scene(Eris::Engine* engine, const char* path) : engine(engine) {
-        this->engine->scenes.push_back(this);
+    Scene::Scene(SceneManager* sceneManager, const char* path) : sceneManager(sceneManager) {
+        this->sceneManager->registerScene(this);
         std::cout << path << std::endl;
     }
     
     void Scene::load() {
-        InputManager::InputManager input = InputManager::InputManager();
-        this->data.push_back(input.event);
+        bool shouldCheckEvent = true;
+        this->data.push_back(shouldCheckEvent);
     }
     
     void Scene::update() {
-        // TODO: Abstract Later! It is almost 2 AM...
-        while(SDL_PollEvent((SDL_Event)this->data[0])) {
-
-        } 
+        if(this->data[0].type() == typeid(bool)) 
+        {
+            if(std::any_cast<bool>(this->data[0])){
+                InputManager::Window e;
+                if(e.checkEvent(e.CLOSE)) {
+                    this->sceneManager->stop();
+                }
+            }
+        }
     }
     
     void Scene::draw() {
         std::cout << "draw" << std::endl;
     }
 
-    void SceneManager::process(Scene* scene) {
+    SceneManager::SceneManager(Eris::Engine* engine) : engine(engine) {}
+
+    void SceneManager::processDefault(Scene* scene) {
         scene->load();
 
-        bool run = true;
-        while(run) {
+        while(this->engine->running()) {
             scene->update();
             scene->draw();
         }
+    }
+
+    void SceneManager::registerScene(Scene* scene) {
+        this->engine->scenes.push_back(scene);
+    }
+
+    void SceneManager::stop() {
+        this->engine->quit();
     }
 }

@@ -3,7 +3,6 @@
 
 #include <string>
 #include <vector>
-#include <any>
 #include <SDL3/SDL.h>
 
 namespace SceneManager {
@@ -19,8 +18,13 @@ namespace Eris {
             std::vector<SceneManager::Scene*> scenes;
             SDL_Window* window;
             SDL_Renderer* renderer;
-
+        private:
+            bool isRunning;
+        
+        public:
         Engine(const char* title, unsigned int width, unsigned int height);
+        bool running();
+        void quit();
     };
 }
 

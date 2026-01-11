@@ -1,11 +1,13 @@
-function load()
+function Load()
+    shouldCheckEvent = true
     print("loaded")
+    return [shouldCheckEvent]
 end
 
-function update()
+function Update()
     print("update")
 end
 
-function draw()
+function Draw()
     print("draw")
 end

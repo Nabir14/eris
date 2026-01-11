@@ -6,8 +6,15 @@
 namespace InputManager {
     class InputManager {
         public:
-            SDL_Event event;
-        InputManager();
+            static SDL_Event Event;
+    };
+
+    class Window {
+        public:
+            enum WindowEvent {
+                CLOSE = SDL_EVENT_WINDOW_CLOSE_REQUESTED
+            };
+        static bool checkEvent(WindowEvent we);
     };
 } 
 

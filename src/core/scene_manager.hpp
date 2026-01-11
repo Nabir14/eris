@@ -12,21 +12,29 @@ namespace Eris {
 namespace SceneManager {
     using GlobalData = std::vector<std::any>;
 
+    class SceneManager;
+
     class Scene {
         private:
             GlobalData data;
-            Eris::Engine* engine;
+            SceneManager* sceneManager;
 
         public:
-        Scene(Eris::Engine* engine, const char* path);
+        Scene(SceneManager* sceneManager, const char* path);
         void load();
         void update();
         void draw();
     };
 
     class SceneManager {
+        private:
+            Eris::Engine* engine;
+
         public:
-        static void process(Scene* scene);
+        SceneManager(Eris::Engine* engine);
+        void registerScene(Scene* scene);
+        void processDefault(Scene* scene);
+        void stop();
     };
 } 
 
