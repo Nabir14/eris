@@ -35,6 +35,11 @@ namespace ScriptServer {
         lua_setglobal(this->LuaState, alias);
     }
 
+    void ScriptServer::exposeFunction(const char* alias, lua_CFunction function) {
+        lua_pushcfunction(this->LuaState, function);
+        lua_setglobal(this->LuaState, alias);
+    }
+
     void ScriptServer::close() {
         lua_close(this->LuaState);
     }
