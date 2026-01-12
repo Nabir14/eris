@@ -1,6 +1,5 @@
 #include "../src/eris.hpp"
 #include "../src/core/scene_manager.hpp"
-#include "../src/core/script_server.hpp"
 
 int add(lua_State* L) {
     lua_Integer a = luaL_checkinteger(L, 1);
@@ -11,7 +10,6 @@ int add(lua_State* L) {
 }
 
 int main() {
-    /*
     Eris::Engine e = Eris::Engine("Space Game", 640, 480);
     SceneManager::SceneManager sm = SceneManager::SceneManager(&e);
 
@@ -19,17 +17,6 @@ int main() {
     SceneManager::Scene s2 = SceneManager::Scene(&sm, "./scenes/s2.lua");
 
     sm.processDefault(&s1);
-    */
-
-    ScriptServer::ScriptServer server = ScriptServer::ScriptServer();
-    server.loadScript("./tests/script.lua");
-    server.exposeData("cintlol", 67);
-    server.exposeFunction("sum", add);
-    server.executeScript();
-    server.callFunction("hello");
-    std::any value = server.getData("anotherHello");
-    ScriptServer::Types::printVariable(value);
-    server.close();
 
     return 0;
 }

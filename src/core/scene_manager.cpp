@@ -1,33 +1,38 @@
 #include "scene_manager.hpp"
 #include "../eris.hpp"
-#include "input_manager.hpp"
+#include "../game/input_manager.hpp"
 #include <iostream>
 
 namespace SceneManager {
     Scene::Scene(SceneManager* sceneManager, const char* path) : sceneManager(sceneManager) {
         this->sceneManager->registerScene(this);
-        std::cout << path << std::endl;
+        this->scriptServer = ScriptServer::ScriptServer();
+        this->scriptServer.loadScript(path);
     }
     
     void Scene::load() {
-        bool shouldCheckEvent = true;
-        this->data.push_back(shouldCheckEvent);
+        this->scriptServer.executeScript();
+        std::vector<std::any> globals = this->scriptServer.callFunction("Load");
+        this->data = globals;
     }
     
     void Scene::update() {
-        if(this->data[0].type() == typeid(bool)) 
-        {
+        if(this->data[0].type() == typeid(bool)) {
             if(std::any_cast<bool>(this->data[0])){
                 InputManager::Window e;
                 if(e.checkEvent(e.CLOSE)) {
-                    this->sceneManager->stop();
+                    this->quitGame();
                 }
             }
         }
     }
     
     void Scene::draw() {
-        std::cout << "draw" << std::endl;
+    }
+
+    void Scene::quitGame() {
+        this->scriptServer.close();
+        this->sceneManager->stop();
     }
 
     SceneManager::SceneManager(Eris::Engine* engine) : engine(engine) {}

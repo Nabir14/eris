@@ -1,13 +1,18 @@
 function Load()
     shouldCheckEvent = true
+    value_s = "hey"
+    value_n = 3215
+    value_draw = "draw"
     print("loaded")
-    return [shouldCheckEvent]
+    return shouldCheckEvent, value_s, value_n, value_draw
 end
 
-function Update()
+function Update(globals)
+    print(globals[2])
+    print(globals[3])
     print("update")
 end
 
-function Draw()
-    print("draw")
+function Draw(globals)
+    print(globals[4])
 end

@@ -4,6 +4,7 @@
 #include <vector>
 #include <any>
 #include <SDL3/SDL.h>
+#include "script_server.hpp"
 
 namespace Eris {
     class Engine;
@@ -18,12 +19,14 @@ namespace SceneManager {
         private:
             GlobalData data;
             SceneManager* sceneManager;
+            ScriptServer::ScriptServer scriptServer;
 
         public:
         Scene(SceneManager* sceneManager, const char* path);
         void load();
         void update();
         void draw();
+        void quitGame();
     };
 
     class SceneManager {

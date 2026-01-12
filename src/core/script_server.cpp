@@ -48,7 +48,10 @@ namespace ScriptServer {
 
 
 
-        for (int i = -return_count; i <= lua_gettop(this->LuaState); ++i){
+        for (int i = -return_count; i <= -1; ++i){
+            printf("[Printing Return Values]");
+            std::any value = Types::getAnyValue(this->LuaState, i);
+            Types::printVariable(value);
             values.push_back(Types::getAnyValue(this->LuaState, i));
         }
 
@@ -75,7 +78,7 @@ namespace ScriptServer {
 
         int return_count = lua_gettop(this->LuaState) - old_stack;
 
-        for (int i = -return_count; i <= lua_gettop(this->LuaState); ++i){
+        for (int i = -return_count; i <= -1; ++i){
             values.push_back(Types::getAnyValue(this->LuaState, i));
         }
 
@@ -111,7 +114,7 @@ namespace ScriptServer {
     }
     
     std::any Types::getAnyValue(lua_State* L, int stack_index) {
-        int type = lua_type(L, lua_gettop(L));
+        int type = lua_type(L, stack_index);
         
         switch (type) {
             case LUA_TSTRING:
