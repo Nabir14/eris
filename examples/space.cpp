@@ -26,6 +26,7 @@ int main() {
     server.exposeData("cintlol", 67);
     server.exposeFunction("sum", add);
     server.executeScript();
+    server.callFunction("hello");
     server.close();
 
     return 0;
