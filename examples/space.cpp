@@ -27,6 +27,8 @@ int main() {
     server.exposeFunction("sum", add);
     server.executeScript();
     server.callFunction("hello");
+    std::any value = server.getData("anotherHello");
+    ScriptServer::Types::printVariable(value);
     server.close();
 
     return 0;

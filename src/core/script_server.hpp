@@ -16,6 +16,7 @@ namespace ScriptServer {
         public:
         static bool pushAnyValue(lua_State* L, std::any value);
         static std::any getAnyValue(lua_State* L, int stack_index);
+        static void printVariable(std::any value);
     };
 
     class ScriptServer {

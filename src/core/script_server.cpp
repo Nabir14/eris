@@ -48,7 +48,7 @@ namespace ScriptServer {
 
 
 
-        for (int i = -return_count; i <= -1; ++i){
+        for (int i = -return_count; i <= lua_gettop(this->LuaState); ++i){
             values.push_back(Types::getAnyValue(this->LuaState, i));
         }
 
@@ -75,13 +75,19 @@ namespace ScriptServer {
 
         int return_count = lua_gettop(this->LuaState) - old_stack;
 
-        for (int i = -return_count; i <= -1; ++i){
+        for (int i = -return_count; i <= lua_gettop(this->LuaState); ++i){
             values.push_back(Types::getAnyValue(this->LuaState, i));
         }
 
         lua_pop(this->LuaState, return_count);
 
         return values;
+    }
+
+    std::any ScriptServer::getData(const char* alias) {
+        lua_getglobal(this->LuaState, alias);
+        std::any value = Types::getAnyValue(this->LuaState, lua_gettop(this->LuaState));
+        return value;
     }
 
     void ScriptServer::close() {
@@ -111,11 +117,27 @@ namespace ScriptServer {
             case LUA_TSTRING:
                 return std::any(lua_tostring(L, stack_index));
             case LUA_TBOOLEAN:
-                return std::any(lua_toboolean(L, stack_index));
+                return std::any((bool)lua_toboolean(L, stack_index));
             case LUA_TNUMBER:
-                return std::any(lua_tonumber(L, stack_index));
+                return std::any((double)lua_tonumber(L, stack_index));
             default:
                 return std::any("");
+        }
+    }
+
+    void Types::printVariable(std::any value) {
+        if (value.type() == typeid(int)) {
+            printf("int");
+            printf("%d", std::any_cast<int>(value));
+        } else if (value.type() == typeid(double)) {
+            printf("%f", std::any_cast<double>(value));
+        } else if (value.type() == typeid(const char*)) {
+            printf("%s", std::any_cast<const char*>(value));
+        } else if (value.type() == typeid(bool)) {
+            const char* boolean = std::any_cast<bool>(value) ? "true" : "false";
+            printf("%s", boolean);
+        } else {
+            printf("Eris Extras: Unknown Type.");
         }
     }
 }
