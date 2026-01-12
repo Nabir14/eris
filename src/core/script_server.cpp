@@ -126,16 +126,13 @@ namespace ScriptServer {
     }
 
     void Types::printVariable(std::any value) {
-        if (value.type() == typeid(int)) {
-            printf("int");
-            printf("%d", std::any_cast<int>(value));
-        } else if (value.type() == typeid(double)) {
-            printf("%f", std::any_cast<double>(value));
+        if (value.type() == typeid(double)) {
+            printf("%f\n", std::any_cast<double>(value));
         } else if (value.type() == typeid(const char*)) {
-            printf("%s", std::any_cast<const char*>(value));
+            printf("%s\n", std::any_cast<const char*>(value));
         } else if (value.type() == typeid(bool)) {
             const char* boolean = std::any_cast<bool>(value) ? "true" : "false";
-            printf("%s", boolean);
+            printf("%s\n", boolean);
         } else {
             printf("Eris Extras: Unknown Type.");
         }
