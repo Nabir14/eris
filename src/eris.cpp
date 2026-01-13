@@ -1,16 +1,19 @@
 #include "eris.hpp"
 #include "core/scene_manager.hpp"
+#include "core/script_server.hpp"
 
 namespace Eris {
-    Engine::Engine(const char* title, uint width, uint height) : title(title), width(width), height(height) {
-        this->window = SDL_CreateWindow(this->title, this->width, this->height, 0);
-        this->renderer =  SDL_CreateRenderer(this->window, NULL);
-
-        this->isRunning = true;
+    void Engine::start(const char* windowTitle, uint windowWidth, uint windowHeight) {
+        title = windowTitle;
+        width = windowWidth;
+        height = windowHeight;
+        window = SDL_CreateWindow(title, width, height, 0);
+        renderer =  SDL_CreateRenderer(window, NULL);
+        isRunning = true;
     }
 
     bool Engine::running() {
-        if (this->isRunning) {
+        if (isRunning) {
             return true;
         } else {
             return false;
@@ -18,6 +21,7 @@ namespace Eris {
     }
 
     void Engine::quit() {
-        this->isRunning = false;
+        ScriptServer::ScriptServer::close();
+        isRunning = false;
     }
 }

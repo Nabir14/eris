@@ -12,19 +12,17 @@ namespace SceneManager {
 namespace Eris {
     class Engine {
         public:
-            const char* title;
-            uint width;
-            uint height;
-            std::vector<SceneManager::Scene*> scenes;
-            SDL_Window* window;
-            SDL_Renderer* renderer;
-        private:
-            bool isRunning;
+            inline static const char* title;
+            inline static uint width;
+            inline static uint height;
+            inline static SDL_Window* window;
+            inline static SDL_Renderer* renderer;
+            inline static bool isRunning;
         
         public:
-        Engine(const char* title, unsigned int width, unsigned int height);
-        bool running();
-        void quit();
+        static void start(const char* title, unsigned int width, unsigned int height);
+        static bool running();
+        static void quit();
     };
 }
 

@@ -3,54 +3,48 @@
 #include "../game/input_manager.hpp"
 #include <iostream>
 
+int Eris_Quit(lua_State* L) {
+    Eris::Engine::quit();
+    return 0;
+}
+
 namespace SceneManager {
-    Scene::Scene(SceneManager* sceneManager, const char* path) : sceneManager(sceneManager) {
-        this->sceneManager->registerScene(this);
-        this->scriptServer = ScriptServer::ScriptServer();
-        this->scriptServer.loadScript(path);
+    Scene::Scene() {
+        SceneManager::registerScene(this);
     }
-    
+
+    void Scene::attachScript(const char* path) {
+        ScriptServer::ScriptServer::loadScript(path);
+    }
+
+    void Scene::exportDefault() {
+        ScriptServer::ScriptServer::exposeFunction("Eris_QuitGame", Eris_Quit);
+        ScriptServer::ScriptServer::exposeFunction("Eris_CheckWindowEvent", InputManager::Window::checkEvent);
+    }
+
     void Scene::load() {
-        this->scriptServer.executeScript();
-        std::vector<std::any> globals = this->scriptServer.callFunction("Load");
-        this->data = globals;
+        ScriptServer::ScriptServer::executeScript();
+        ScriptServer::ScriptServer::callFunction("Load");
     }
     
     void Scene::update() {
-        if(this->data[0].type() == typeid(bool)) {
-            if(std::any_cast<bool>(this->data[0])){
-                InputManager::Window e;
-                if(e.checkEvent(e.CLOSE)) {
-                    this->quitGame();
-                }
-            }
-        }
+        ScriptServer::ScriptServer::callFunction("Update");
     }
     
     void Scene::draw() {
+        ScriptServer::ScriptServer::callFunction("Draw");
     }
-
-    void Scene::quitGame() {
-        this->scriptServer.close();
-        this->sceneManager->stop();
-    }
-
-    SceneManager::SceneManager(Eris::Engine* engine) : engine(engine) {}
 
     void SceneManager::processDefault(Scene* scene) {
         scene->load();
 
-        while(this->engine->running()) {
+        while(Eris::Engine::running()) {
             scene->update();
             scene->draw();
         }
     }
 
     void SceneManager::registerScene(Scene* scene) {
-        this->engine->scenes.push_back(scene);
-    }
-
-    void SceneManager::stop() {
-        this->engine->quit();
+        SceneManager::scenes.push_back(scene);
     }
 }

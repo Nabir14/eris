@@ -2,25 +2,25 @@
 
 namespace ScriptServer {
     ScriptServer::ScriptServer() {
-        this->LuaState = luaL_newstate();
-        luaL_openlibs(this->LuaState);
+        LuaState = luaL_newstate();
+        luaL_openlibs(LuaState);
     }
     
     void ScriptServer::loadScript(const char* path) {
-        this->scriptPath = path;
+        scriptPath = path;
     }
 
     void ScriptServer::executeScript() {
-        if (luaL_dofile(this->LuaState, this->scriptPath) == LUA_OK) {
-            lua_pop(this->LuaState, lua_gettop(this->LuaState));
+        if (luaL_dofile(LuaState, scriptPath) == LUA_OK) {
+            lua_pop(LuaState, lua_gettop(LuaState));
         } else {
-            printf("Eris Script Server: Error Running Script %s.\n", this->scriptPath);
+            printf("Eris Script Server: Error Running Script %s.\n", scriptPath);
         }
     }
 
     void ScriptServer::exposeData(const char* alias, std::any value) {
-        if(Types::pushAnyValue(this->LuaState, value)){
-            lua_setglobal(this->LuaState, alias);
+        if(Types::pushAnyValue(LuaState, value)){
+            lua_setglobal(LuaState, alias);
         } else {
             printf("Eris Script Server: Type Not Exposable.\n");
             return;
@@ -28,73 +28,71 @@ namespace ScriptServer {
     }
 
     void ScriptServer::exposeFunction(const char* alias, lua_CFunction function) {
-        lua_pushcfunction(this->LuaState, function);
-        lua_setglobal(this->LuaState, alias);
+        lua_pushcfunction(LuaState, function);
+        lua_setglobal(LuaState, alias);
     }
 
     std::vector<std::any> ScriptServer::callFunction(const char* alias) {
-        int old_stack = lua_gettop(this->LuaState);
+        int old_stack = lua_gettop(LuaState);
 
-        lua_getglobal(this->LuaState, alias);
+        lua_getglobal(LuaState, alias);
         
         std::vector<std::any> values;
         
-        if(lua_pcall(this->LuaState,0, LUA_MULTRET, 0) != LUA_OK) {
+        if(lua_pcall(LuaState,0, LUA_MULTRET, 0) != LUA_OK) {
             printf("Eris Script Server: Error Calling Function '%s'.\n", alias);
             return values;
         }
 
-        int return_count = lua_gettop(this->LuaState) - old_stack;
-
-
+        int return_count = lua_gettop(LuaState) - old_stack;
 
         for (int i = -return_count; i <= -1; ++i){
-            printf("[Printing Return Values]");
-            std::any value = Types::getAnyValue(this->LuaState, i);
+            printf("[Printing Return Values]: ");
+            std::any value = Types::getAnyValue(LuaState, i);
             Types::printVariable(value);
-            values.push_back(Types::getAnyValue(this->LuaState, i));
+            values.push_back(Types::getAnyValue(LuaState, i));
         }
 
-        lua_pop(this->LuaState, return_count);
+        lua_pop(LuaState, return_count);
 
         return values;
     }
 
     std::vector<std::any> ScriptServer::callFunction(const char* alias, std::vector<std::any> args) {
-        int old_stack = lua_gettop(this->LuaState);
+        int old_stack = lua_gettop(LuaState);
 
-        lua_getglobal(this->LuaState, alias);
+        lua_getglobal(LuaState, alias);
         
         std::vector<std::any> values;
         
         for (int i = 0; i < args.size(); i++) {
-            Types::pushAnyValue(this->LuaState, args[i]);
+            Types::pushAnyValue(LuaState, args[i]);
         }
 
-        if(lua_pcall(this->LuaState, args.size(), LUA_MULTRET, 0) != LUA_OK) {
+        if(lua_pcall(LuaState, args.size(), LUA_MULTRET, 0) != LUA_OK) {
             printf("Eris Script Server: Error Calling Function '%s'.\n", alias);
             return values;
         }
 
-        int return_count = lua_gettop(this->LuaState) - old_stack;
+        int return_count = lua_gettop(LuaState) - old_stack;
 
         for (int i = -return_count; i <= -1; ++i){
-            values.push_back(Types::getAnyValue(this->LuaState, i));
+            values.push_back(Types::getAnyValue(LuaState, i));
         }
 
-        lua_pop(this->LuaState, return_count);
+        lua_pop(LuaState, return_count);
 
         return values;
     }
 
     std::any ScriptServer::getData(const char* alias) {
-        lua_getglobal(this->LuaState, alias);
-        std::any value = Types::getAnyValue(this->LuaState, lua_gettop(this->LuaState));
+        lua_getglobal(LuaState, alias);
+        std::any value = Types::getAnyValue(LuaState, lua_gettop(LuaState));
         return value;
     }
 
     void ScriptServer::close() {
-        lua_close(this->LuaState);
+        lua_close(LuaState);
     }
 
     bool Types::pushAnyValue(lua_State* L, std::any value) {

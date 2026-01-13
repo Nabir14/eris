@@ -2,12 +2,15 @@
 
 SDL_Event InputManager::InputManager::Event;
 
-bool InputManager::Window::checkEvent(WindowEvent event) {
+int InputManager::Window::checkEvent(lua_State* L) {
+    const char* event_name = luaL_checkstring(L, 1);
     SDL_PollEvent(&InputManager::Event);
 
-    if (InputManager::Event.type == event) {
-        return true;
+    if (InputManager::Event.type == Window::WindowEvent.at(event_name)) {
+        lua_pushboolean(L, 1);
     } else {
-        return false;
+        lua_pushboolean(L, 0);
     }
+
+    return 1;
 }

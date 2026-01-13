@@ -8,7 +8,7 @@ extern "C" {
 }
 
 #include <any>
-#include <functional>
+#include <vector>
 #include <cstdarg>
 
 namespace ScriptServer {
@@ -21,20 +21,17 @@ namespace ScriptServer {
 
     class ScriptServer {
         public:
-            const char* scriptPath;
-
+            inline static const char* scriptPath;
+            inline static lua_State* LuaState;
         ScriptServer();
-        void loadScript(const char* path);
-        void executeScript();
-        void exposeData(const char* alias, std::any value);
-        void exposeFunction(const char* name, lua_CFunction function);
-        std::vector<std::any> callFunction(const char* alias);
-        std::vector<std::any> callFunction(const char* alias, std::vector<std::any> args);
-        std::any getData(const char* alias);
-        void close();
-
-        private:
-            lua_State* LuaState;
+        static void loadScript(const char* path);
+        static void executeScript();
+        static void exposeData(const char* alias, std::any value);
+        static void exposeFunction(const char* name, lua_CFunction function);
+        static std::vector<std::any> callFunction(const char* alias);
+        static std::vector<std::any> callFunction(const char* alias, std::vector<std::any> args);
+        static std::any getData(const char* alias);
+        static void close();
     };
 }
 

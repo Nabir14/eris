@@ -10,13 +10,15 @@ int add(lua_State* L) {
 }
 
 int main() {
-    Eris::Engine e = Eris::Engine("Space Game", 640, 480);
-    SceneManager::SceneManager sm = SceneManager::SceneManager(&e);
+    printf("hey");
+    Eris::Engine::start("Space", 640, 480);
+    SceneManager::Scene s1 = SceneManager::Scene();
+    s1.attachScript("scenes/s1.lua");
+    s1.exportDefault();
 
-    SceneManager::Scene s1 = SceneManager::Scene(&sm, "./scenes/s1.lua");
-    SceneManager::Scene s2 = SceneManager::Scene(&sm, "./scenes/s2.lua");
+    SceneManager::Scene s2 = SceneManager::Scene();
 
-    sm.processDefault(&s1);
+    SceneManager::SceneManager::processDefault(&s1);
 
     return 0;
 }

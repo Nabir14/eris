@@ -11,34 +11,26 @@ namespace Eris {
 }
 
 namespace SceneManager {
-    using GlobalData = std::vector<std::any>;
-
     class SceneManager;
 
     class Scene {
-        private:
-            GlobalData data;
-            SceneManager* sceneManager;
-            ScriptServer::ScriptServer scriptServer;
-
         public:
-        Scene(SceneManager* sceneManager, const char* path);
+        Scene();
+        void attachScript(const char* path);
+        void exportDefault();
         void load();
         void update();
         void draw();
-        void quitGame();
     };
 
     class SceneManager {
-        private:
-            Eris::Engine* engine;
-
         public:
-        SceneManager(Eris::Engine* engine);
-        void registerScene(Scene* scene);
-        void processDefault(Scene* scene);
-        void stop();
+            inline static std::vector<Scene*> scenes;
+        static void registerScene(Scene* scene);
+        static void processDefault(Scene* scene);
     };
 } 
+
+int Eris_Quit(lua_State* L);
 
 #endif
