@@ -1,7 +1,7 @@
 #include "script_server.hpp"
 
 namespace ScriptServer {
-    ScriptServer::ScriptServer() {
+    void ScriptServer::start() {
         LuaState = luaL_newstate();
         luaL_openlibs(LuaState);
     }

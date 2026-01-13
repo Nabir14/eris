@@ -23,7 +23,7 @@ namespace ScriptServer {
         public:
             inline static const char* scriptPath;
             inline static lua_State* LuaState;
-        ScriptServer();
+        static void start();
         static void loadScript(const char* path);
         static void executeScript();
         static void exposeData(const char* alias, std::any value);

@@ -13,13 +13,14 @@ namespace SceneManager {
         SceneManager::registerScene(this);
     }
 
-    void Scene::attachScript(const char* path) {
-        ScriptServer::ScriptServer::loadScript(path);
-    }
-
     void Scene::exportDefault() {
         ScriptServer::ScriptServer::exposeFunction("Eris_QuitGame", Eris_Quit);
         ScriptServer::ScriptServer::exposeFunction("Eris_CheckWindowEvent", InputManager::Window::checkEvent);
+    }
+
+    void Scene::attachScript(const char* path) {
+        ScriptServer::ScriptServer::loadScript(path);
+        this->exportDefault();
     }
 
     void Scene::load() {

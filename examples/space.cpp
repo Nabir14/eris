@@ -10,11 +10,10 @@ int add(lua_State* L) {
 }
 
 int main() {
-    printf("hey");
     Eris::Engine::start("Space", 640, 480);
+
     SceneManager::Scene s1 = SceneManager::Scene();
-    s1.attachScript("scenes/s1.lua");
-    s1.exportDefault();
+    s1.attachScript("./scenes/s1.lua");
 
     SceneManager::Scene s2 = SceneManager::Scene();
 

@@ -10,6 +10,7 @@ namespace Eris {
         window = SDL_CreateWindow(title, width, height, 0);
         renderer =  SDL_CreateRenderer(window, NULL);
         isRunning = true;
+        ScriptServer::ScriptServer::start();
     }
 
     bool Engine::running() {
@@ -21,7 +22,7 @@ namespace Eris {
     }
 
     void Engine::quit() {
-        ScriptServer::ScriptServer::close();
         isRunning = false;
+        ScriptServer::ScriptServer::close();
     }
 }

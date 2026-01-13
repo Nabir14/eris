@@ -3,6 +3,7 @@
 
 #include <SDL3/SDL.h>
 #include <map>
+#include <string>
 
 extern "C" {
     #include <lua.h>
@@ -13,7 +14,7 @@ extern "C" {
 namespace InputManager {
     class Window {
         public:
-            inline static const std::map<const char*, int> WindowEvent {
+            inline static const std::map<std::string, int> WindowEvent {
                 {"CLOSE", SDL_EVENT_WINDOW_CLOSE_REQUESTED },
             };
         
