@@ -3,24 +3,13 @@
 #include "../game/input_manager.hpp"
 #include <iostream>
 
-int Eris_Quit(lua_State* L) {
-    Eris::Engine::quit();
-    return 0;
-}
-
 namespace SceneManager {
     Scene::Scene() {
         SceneManager::registerScene(this);
     }
 
-    void Scene::exportDefault() {
-        ScriptServer::ScriptServer::exposeFunction("Eris_QuitGame", Eris_Quit);
-        ScriptServer::ScriptServer::exposeFunction("Eris_CheckWindowEvent", InputManager::Window::checkEvent);
-    }
-
     void Scene::attachScript(const char* path) {
         ScriptServer::ScriptServer::loadScript(path);
-        this->exportDefault();
     }
 
     void Scene::load() {

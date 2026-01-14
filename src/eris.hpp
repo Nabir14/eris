@@ -9,6 +9,13 @@ namespace SceneManager {
     class Scene;
 }
 
+enum ErisFlags {
+    ENGINE = 1 << 0,
+    SCENE = 1 << 1,
+    INPUT_MANAGER = 1 << 2,
+    SCENE_MANAGER = 1 << 3,
+};
+
 namespace Eris {
     class Engine {
         public:
@@ -18,11 +25,13 @@ namespace Eris {
             inline static SDL_Window* window;
             inline static SDL_Renderer* renderer;
             inline static bool isRunning;
-        
+
         public:
         static void start(const char* title, unsigned int width, unsigned int height);
+        static void exportDefault(const char flags);
         static bool running();
-        static void quit();
+        static int quit(lua_State* L);
+        static int Eris_Quit(lua_State* L);
     };
 }
 

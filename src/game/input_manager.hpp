@@ -24,6 +24,9 @@ namespace InputManager {
     class InputManager {
         public:
             static SDL_Event Event;
+        
+        static void attachScript(const char* path);
+        static void exportDefault();
     };
 } 
 

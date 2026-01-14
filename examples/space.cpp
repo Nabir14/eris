@@ -1,16 +1,10 @@
 #include "../src/eris.hpp"
 #include "../src/core/scene_manager.hpp"
-
-int add(lua_State* L) {
-    lua_Integer a = luaL_checkinteger(L, 1);
-    lua_Integer b = luaL_checkinteger(L, 2);
-    lua_Integer s = a + b;
-    lua_pushinteger(L, s);
-    return 1;
-}
+#include "../src/game/input_manager.hpp"
 
 int main() {
     Eris::Engine::start("Space", 640, 480);
+    Eris::Engine::exportDefault(ENGINE | INPUT_MANAGER);
 
     SceneManager::Scene s1 = SceneManager::Scene();
     s1.attachScript("./scenes/s1.lua");

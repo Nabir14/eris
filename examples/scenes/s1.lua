@@ -6,7 +6,7 @@ end
 
 function Update()
     if Eris_CheckWindowEvent("CLOSE") then
-        Eris_QuitGame()
+        Eris_Quit()
     else
         print("update")
     end
