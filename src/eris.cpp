@@ -1,6 +1,10 @@
 #include "eris.hpp"
 
 namespace Eris {
+    bool Engine::isRunning;
+    SDL_Window* Engine::window;
+    SDL_Renderer* Engine::renderer;
+    
     void Engine::Start(const char* title, int width, int height) {
         Engine::isRunning = true;
         Engine::window = SDL_CreateWindow(title, width, height, 0);

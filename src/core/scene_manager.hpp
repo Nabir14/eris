@@ -6,9 +6,9 @@
 namespace SceneManager {
     class Scene {
         public:
-        virtual void OnLoad();
-        virtual void OnUpdate();
-        virtual void OnDraw();
+        virtual void OnLoad() = 0;
+        virtual void OnUpdate() = 0;
+        virtual void OnDraw() = 0;
         virtual ~Scene();
     };
 

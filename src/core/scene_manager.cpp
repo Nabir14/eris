@@ -4,6 +4,8 @@
 namespace SceneManager {
     Scene::~Scene() {}
 
+    std::vector<Scene*> SceneManager::scenes;
+    
     void SceneManager::registerScene(Scene* scene) {
         SceneManager::scenes.push_back(scene);
     }
