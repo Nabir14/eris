@@ -22,7 +22,6 @@ class World : public SceneManager::Scene {
         if (InputManager::Window::CheckEvent(InputManager::Window::CLOSE)) {
             Eris::Engine::Quit();
         }
-
     }
 
     void OnDraw() override {
