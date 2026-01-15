@@ -1,17 +1,42 @@
-#include "../src/eris.hpp"
 #include "../src/core/scene_manager.hpp"
 #include "../src/game/input_manager.hpp"
+#include "../src/eris.hpp"
+#include <stdio.h>
+
+enum GameScenes {
+    WORLD_SCENE = 0,
+};
+
+class World : public SceneManager::Scene {
+    public:
+        const char* loadStr = "Hello From OnLoad()";
+        const char* updateStr = "Hello From OnUpdate()";
+        const char* drawStr = "Hello From OnDraw()";
+    
+    void OnLoad() override {
+        printf("%s\n", loadStr);
+    }
+
+    void OnUpdate() override {
+        printf("%s\n", updateStr);
+        if (InputManager::Window::CheckEvent(InputManager::Window::CLOSE)) {
+            Eris::Engine::Quit();
+        }
+
+    }
+
+    void OnDraw() override {
+        printf("%s\n", drawStr);
+    }
+};
 
 int main() {
-    Eris::Engine::start("Space", 640, 480);
-    Eris::Engine::exportDefault(ENGINE | INPUT_MANAGER);
+    Eris::Engine::Start("Space", 640, 480);
 
-    SceneManager::Scene s1 = SceneManager::Scene();
-    s1.attachScript("./scenes/s1.lua");
-
-    SceneManager::Scene s2 = SceneManager::Scene();
-
-    SceneManager::SceneManager::processDefault(&s1);
+    World worldScene;
+    SceneManager::SceneManager::registerScene(&worldScene);
+    
+    SceneManager::SceneManager::processDefault(WORLD_SCENE);
 
     return 0;
 }

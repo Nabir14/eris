@@ -1,36 +1,23 @@
 #ifndef SCENE_MANAGER_HPP
 #define SCENE_MANAGER_HPP
 
-#include <vector>
-#include <any>
-#include <SDL3/SDL.h>
-#include "script_server.hpp"
-
-namespace Eris {
-    class Engine;
-}
+#include<vector>
 
 namespace SceneManager {
-    class SceneManager;
-
     class Scene {
         public:
-        Scene();
-        void attachScript(const char* path);
-        void exportDefault();
-        void load();
-        void update();
-        void draw();
+        virtual void OnLoad();
+        virtual void OnUpdate();
+        virtual void OnDraw();
+        virtual ~Scene();
     };
 
     class SceneManager {
         public:
-            inline static std::vector<Scene*> scenes;
+            static std::vector<Scene*> scenes;
         static void registerScene(Scene* scene);
-        static void processDefault(Scene* scene);
+        static void processDefault(int index);
     };
-} 
-
-int Eris_Quit(lua_State* L);
+}
 
 #endif
