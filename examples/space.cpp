@@ -1,7 +1,7 @@
+#include <stdio.h>
+#include "../src/eris.hpp"
 #include "../src/core/scene_manager.hpp"
 #include "../src/game/input_manager.hpp"
-#include "../src/eris.hpp"
-#include <stdio.h>
 
 enum GameScenes {
     WORLD_SCENE = 0,
@@ -35,7 +35,7 @@ int main() {
 
     World worldScene;
     SceneManager::SceneManager::registerScene(&worldScene);
-    
+
     SceneManager::SceneManager::processDefault(WORLD_SCENE);
 
     return 0;

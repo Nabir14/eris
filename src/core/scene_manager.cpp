@@ -9,7 +9,6 @@ namespace SceneManager {
     }
 
     void SceneManager::processDefault(int index) {
-
         if (index < SceneManager::scenes.size()) {
             Scene* scene;
             scene = SceneManager::scenes.at(index);
