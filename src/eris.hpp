@@ -5,10 +5,10 @@
 
 namespace Eris {
     class Engine {
-        private:
+        public:
             static SDL_Window* window;
             static SDL_Renderer* renderer;
-        public:
+            static SDL_GLContext glContext;
             static bool isRunning;
         static void Start(const char* title, int width, int height);
         static void Quit();

@@ -7,6 +7,7 @@ namespace InputManager {
     class InputManager {
         public:
             static SDL_Event Event;
+        static void Process();
     };
 
     class Window {

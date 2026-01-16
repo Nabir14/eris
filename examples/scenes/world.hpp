@@ -1,7 +1,7 @@
 #ifndef WORLD_HPP
 #define WORLD_HPP
 
-#include "../../src/core/scene_manager.hpp"
+#include <core/scene_manager.hpp>
 
 namespace World {
     class World : public SceneManager::Scene {
@@ -10,7 +10,7 @@ namespace World {
         World();
         void OnLoad() override;
         void OnUpdate() override;
-        void OnDraw() override;
+        void OnRender() override;
     };
 }
 

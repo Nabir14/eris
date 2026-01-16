@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "../src/eris.hpp"
-#include "../src/core/scene_manager.hpp"
+#include <eris.hpp>
+#include <core/scene_manager.hpp>
 #include "scenes/world.hpp"
 
 enum GameScenes {

@@ -1,10 +1,12 @@
-#include "world.hpp"
 #include <stdio.h>
-#include "../../src/game/input_manager.hpp"
-#include "../../src/eris.hpp"
+#include <game/input_manager.hpp>
+#include <eris.hpp>
+#include "world.hpp"
+
 
 namespace World {
     World::World() {
+        this->defaultClearColor = Color::RGBA(0.025f, 0.05f, 0.1f, 1.0f);
         this->text = "[SpaceLog: World Scene Loaded.]";
     }
 
@@ -18,7 +20,7 @@ namespace World {
         }
     }
 
-    void World::OnDraw() {
+    void World::OnRender() {
 
     }
 }
