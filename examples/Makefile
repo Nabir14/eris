@@ -1,6 +1,6 @@
 all: clean compile run
 clean:
-	rm -rf space eris.o input.o scene.o world.o glad.o
+	rm -rf eris.o input.o scene.o world.o glad.o color.o
 compile:
 	gcc -c ../libs/glad/src/glad.c -o glad.o -I../libs/glad/include/
 	g++ -c ../src/eris.cpp -o eris.o -I../libs/glad/include/

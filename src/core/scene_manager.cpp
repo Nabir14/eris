@@ -2,6 +2,7 @@
 #include "scene_manager.hpp"
 #include "../eris.hpp"
 #include "../game/input_manager.hpp"
+#include "renderer.hpp"
 
 namespace SceneManager {
     Scene::~Scene() {}
@@ -22,8 +23,7 @@ namespace SceneManager {
             while(Eris::Engine::isRunning) {
                 scene->OnUpdate();
 
-                glClearColor(scene->defaultClearColor.r, scene->defaultClearColor.g, scene->defaultClearColor.b, scene->defaultClearColor.a);
-                glClear(GL_COLOR_BUFFER_BIT);
+                Renderer::Renderer::Clear(scene->defaultClearColor);
                 
                 scene->OnRender();
                 
