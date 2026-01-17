@@ -1,13 +1,16 @@
 #ifndef MESH_HPP
 #define MESH_HPP
 
+#include <vector>
+
 namespace Mesh {
-    class Triangle {
-        const float verticies[9] = {
-            -0.5f, -0.5f, 0.0f,
-            0.5f, -0.5f, 0.0f,
-            0.0f, 0.5f, 0.0f
-        };
+    class Mesh {
+        public:
+            std::vector<const float> verticies;
+        Mesh(const float vertices[]);
+    };
+    class Primitives {
+        static const float Triangle[9];
     };
 }
 
