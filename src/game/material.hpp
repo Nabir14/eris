@@ -1,5 +1,5 @@
 #ifndef MATERIAL_HPP
-#define METARIAL_HPP
+#define MATERIAL_HPP
 
 namespace Material {
     class Material {
