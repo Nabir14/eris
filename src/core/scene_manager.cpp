@@ -1,4 +1,3 @@
-#include <glad/glad.h>
 #include "scene_manager.hpp"
 #include "../eris.hpp"
 #include "../game/input_manager.hpp"
@@ -24,9 +23,9 @@ namespace SceneManager {
                 scene->OnUpdate();
 
                 Renderer::Renderer::Clear(scene->defaultClearColor);
-                
+
                 scene->OnRender();
-                
+            
                 InputManager::InputManager::Process();
                 SDL_GL_SwapWindow(Eris::Engine::window);
             }

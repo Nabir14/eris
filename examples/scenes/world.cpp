@@ -21,6 +21,6 @@ namespace World {
     }
 
     void World::OnRender() {
-
+        this->player.OnDraw();
     }
 }

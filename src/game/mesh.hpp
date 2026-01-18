@@ -6,11 +6,13 @@
 namespace Mesh {
     class Mesh {
         public:
-            std::vector<const float> verticies;
-        Mesh(const float vertices[]);
+            unsigned int VBO, VAO;
+            std::vector<float> verticies;
+        Mesh(const std::vector<float> vertices);
     };
     class Primitives {
-        static const float Triangle[9];
+        public:
+        static const std::vector<float> Triangle;
     };
 }
 
