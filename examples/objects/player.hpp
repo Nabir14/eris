@@ -7,7 +7,7 @@
 namespace Player {
     class Player : public GameObject::GameObject {
         public:
-            Mesh::Mesh shape = Mesh::Mesh(Mesh::Primitives::Triangle);
+            Mesh::Mesh shape = Mesh::Mesh(Primitives::Triangle::vertices, Primitives::Triangle::indecies);
             Material::Material mat = Material::Material(Material::StandardMaterial::vertexShaderSource, Material::StandardMaterial::fragmentShaderSource);
         
         Player();

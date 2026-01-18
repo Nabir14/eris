@@ -10,6 +10,7 @@ namespace Renderer {
     void Renderer::Render(Mesh::Mesh *mesh, Material::Material *material) {
         glUseProgram(material->shaderProgram);
         glBindVertexArray(mesh->VAO);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
+        glBindVertexArray(0);
     }
 }
