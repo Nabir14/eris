@@ -8,8 +8,8 @@ namespace Mesh {
         public:
             unsigned int VBO, VAO, EBO;
             std::vector<float> verticies;
-            std::vector<float> indecies;
-        Mesh(const std::vector<float> vertices, const std::vector<float> indecies);
+            std::vector<unsigned int> indecies;
+        Mesh(const std::vector<float> vertices, const std::vector<unsigned int> indecies);
     };
 }
 
@@ -17,13 +17,13 @@ namespace Primitives {
     class Triangle {
         public:
         static const std::vector<float> vertices;
-        static const std::vector<float> indecies;
+        static const std::vector<unsigned int> indecies;
     };
 
     class Rect {
         public:
         static const std::vector<float> vertices;
-        static const std::vector<float> indecies;
+        static const std::vector<unsigned int> indecies;
     };
 }
 
