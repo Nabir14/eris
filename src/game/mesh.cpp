@@ -30,9 +30,6 @@ namespace Mesh {
     Mesh::Mesh(const std::vector<float> vertices, const std::vector<unsigned int> indecies) {
         this->verticies = vertices;
         this->indecies = indecies;
-        for (int i = 0; i < this->verticies.size(); i++) {
-            printf("%f\n", this->verticies.at(i));
-        }
         
         glGenVertexArrays(1, &this->VAO);
         glBindVertexArray(this->VAO);
