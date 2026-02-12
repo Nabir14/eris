@@ -22,7 +22,7 @@ export class Renderer {
 			scene.onDraw(this.deltaTime)
 
 			requestAnimationFrame(renderLoop)
-		})
+		}
 		
 		requestAnimationFrame(renderLoop)
 	}
