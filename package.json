@@ -1,0 +1,15 @@
+{
+  "name": "eris",
+  "version": "1.0.0",
+  "description": "A 3D Game Engine",
+  "license": "ISC",
+  "author": "Nabir14",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "exampleServer": "node ."
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

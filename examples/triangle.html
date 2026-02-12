@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+        <head>
+                <title>Eris Triangle Example</title>
+        </head>
+        <body>
+        <script type="module">
+		import { Eris } from "./eris.js"
+		import { Renderer } from "./renderer.js"
+		import { Scene } from "./scene.js"
+		import { Color } from "./types/color.js"
+		
+		Eris.start()
+		Renderer.start()
+
+		class World extends Scene {
+			constructor() {
+				super()
+			}
+
+			onDraw(deltaTime) {
+				console.log(deltaTime)
+			} 
+		}
+		
+		Renderer.render(new World())
+	</script>
+        </body>
+</html>
