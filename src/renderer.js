@@ -1,5 +1,6 @@
 import { Eris } from './eris.js'
 import { ErisConsole } from './utils/eris_console.js'
+import { glMatrix, mat4 } from './glMatrix/index.js'
 
 export class Renderer {
 	static {
@@ -45,10 +46,24 @@ export class Renderer {
 
 				if (mesh && material) {
 					if (typeof object.onDraw === 'function') { object.onDraw(this.deltaTime) }
-					
+
 					Renderer.context.useProgram(material.shaderProgram)
+
+					let transform = mat4.create()
+					mat4.translate(transform, transform, object.position)
+					mat4.rotateX(transform, transform, glMatrix.toRadian(object.rotation[0]))
+					mat4.rotateY(transform, transform, glMatrix.toRadian(object.rotation[1]))
+					mat4.rotateZ(transform, transform, glMatrix.toRadian(object.rotation[2]))
+					mat4.scale(transform, transform, object.scale)
+
+					Renderer.context.uniformMatrix4fv(
+						Renderer.context.getUniformLocation(material.shaderProgram, "uTransform"),
+						false,
+						transform
+					)
+
 					Renderer.context.bindVertexArray(mesh.vao)
-					Renderer.context.drawArrays(Renderer.context.TRIANGLES, 0, scene.totalVertexCount)
+					Renderer.context.drawArrays(Renderer.context.TRIANGLES, 0, mesh.vertices.length / 3)
 				}
 			}
 	

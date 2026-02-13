@@ -15,6 +15,10 @@
 			onLoad() {
 				ErisConsole.log("Triangle Loaded Successfully")
 			}
+
+			onUpdate(deltaTime) {
+				this.rotation[1] += .1 * deltaTime
+			}
 		}
 
 		class World extends Scene {

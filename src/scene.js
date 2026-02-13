@@ -1,4 +1,3 @@
-import { Renderer } from './renderer.js'
 import { Color } from './types/color.js'
 
 export class Scene {
@@ -6,7 +5,6 @@ export class Scene {
 		this.clearColor = new Color(0, 0, 0, 1)
 		this.activeCamera = null
 		this.objects = []
-		this.totalVertexCount = 0
 	}
 
 	setClearColor(color) {
@@ -24,13 +22,6 @@ export class Scene {
 	_processDefault() {
 		for (const object of this.objects) {
 			if (typeof object.onLoad === 'function') { object.onLoad() }
-			
-			const material = object.material
-			const mesh = object.mesh
-
-			if (material && mesh) {
-				this.totalVertexCount += mesh.vertices.length / 3
-			}
 		}
 	}
 

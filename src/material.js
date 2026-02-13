@@ -1,5 +1,6 @@
 import { Renderer } from './renderer.js'
 import { ErisConsole } from './utils/eris_console.js'
+import { vec3 } from './glMatrix/index.js'
 
 export class EmptyMaterial {
 	constructor(vertexShaderSource, fragmentShaderSource) {
@@ -30,6 +31,10 @@ export class EmptyMaterial {
 			ErisConsole.warn(Renderer.context.getProgramInfoLog(this.shaderProgram))
 		}
 	}
+
+	getParameter(parameter) {
+		return Renderer.context.getUniform(this.shaderProgram, parameter)
+	}
 }
 
 export class StandardMaterial extends EmptyMaterial {
@@ -37,9 +42,11 @@ export class StandardMaterial extends EmptyMaterial {
 		super(`#version 300 es
 
 		layout (location = 0) in vec3 attributePosition;
+		uniform mat4 uTransform;
+
 
 		void main() {
-			gl_Position = vec4(attributePosition, 1.0);
+			gl_Position = uTransform * vec4(attributePosition, 1.0);
 		}
 		`, `#version 300 es
 			
@@ -50,6 +57,6 @@ export class StandardMaterial extends EmptyMaterial {
 		void main() {
 			FragColor = vec4(1.0, 1.0, 1.0, 1.0);
 		}
-		`)	
+		`)
 	}
 }
