@@ -7,6 +7,7 @@ const PORT = 8080
 
 APP.use(express.static("examples/"))
 APP.use(express.static("src/"))
+APP.use(express.static("libs/"))
 
 APP.listen(PORT, () => {
 	ErisConsole.log("[Example Server Started!]")

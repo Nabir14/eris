@@ -8,19 +8,26 @@
 		import { Eris } from "./eris.js"
 		import { Renderer } from "./renderer.js"
 		import { Scene } from "./scene.js"
+		import { GameObject } from "./game_object.js"
+		import { TriangleMesh } from "./mesh.js"
+		import { StandardMaterial } from "./material.js"
 		import { Color } from "./types/color.js"
-		
+		import { ErisConsole } from "./utils/eris_console.js"
+
 		Eris.start()
 		Renderer.start()
 
 		class World extends Scene {
 			constructor() {
 				super()
+				const triangle = new GameObject(new TriangleMesh(), new StandardMaterial())
+				
+				ErisConsole.log(JSON.stringify(triangle))
+				this.addObjects([ triangle ])	
 			}
 
-			onDraw(deltaTime) {
-				console.log(deltaTime)
-			} 
+			onUpate(deltaTime) {}
+			onDraw(deltaTime) {} 
 		}
 		
 		Renderer.render(new World())

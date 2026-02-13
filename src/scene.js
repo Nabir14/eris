@@ -3,23 +3,37 @@ import { Color } from './types/color.js'
 
 export class Scene {
 	constructor() {
-		this.gl = Renderer.context
 		this.clearColor = new Color(0, 0, 0, 1)
+		this.activeCamera = null
+		this.objects = []
+		this.triangleCount = 0
 	}
 
 	setClearColor(color) {
 		this.clearColor = color
 	}
 
-	_processDefault() {
-		this.gl.clearColor(
-			this.clearColor.r,
-			this.clearColor.g,
-			this.clearColor.b,
-			this.clearColor.a
-		)
-		this.gl.clear(this.gl.COLOR_BUFFER_BIT)
+	setActiveCamera(camera) {
+		this.activeCamera = camera
 	}
 
-	onDraw() {}
+	addObjects(objects_array) {
+		this.objects.push(objects_array)
+	}
+	
+	_processDefault() {
+		for (const index in this.objects) {
+			const object = this.objects[index]
+			const material = object.material
+			const mesh = object.mesh
+
+			if (material && mesh) {
+				this.triangleCount += mesh.vertices.length
+			}
+		}
+	}
+
+	onLoad() {}
+	onUpdate(deltaTime) {}
+	onDraw(deltaTime) {}
 }
