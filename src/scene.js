@@ -6,7 +6,7 @@ export class Scene {
 		this.clearColor = new Color(0, 0, 0, 1)
 		this.activeCamera = null
 		this.objects = []
-		this.triangleCount = 0
+		this.totalVertexCount = 0
 	}
 
 	setClearColor(color) {
@@ -18,17 +18,18 @@ export class Scene {
 	}
 
 	addObjects(objects_array) {
-		this.objects.push(objects_array)
+		this.objects.push(...objects_array)
 	}
 	
 	_processDefault() {
-		for (const index in this.objects) {
-			const object = this.objects[index]
+		for (const object of this.objects) {
+			if (typeof object.onLoad === 'function') { object.onLoad() }
+			
 			const material = object.material
 			const mesh = object.mesh
 
 			if (material && mesh) {
-				this.triangleCount += mesh.vertices.length
+				this.totalVertexCount += mesh.vertices.length / 3
 			}
 		}
 	}

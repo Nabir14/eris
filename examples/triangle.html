@@ -5,29 +5,27 @@
         </head>
         <body>
         <script type="module">
-		import { Eris } from "./eris.js"
-		import { Renderer } from "./renderer.js"
-		import { Scene } from "./scene.js"
-		import { GameObject } from "./game_object.js"
-		import { TriangleMesh } from "./mesh.js"
-		import { StandardMaterial } from "./material.js"
-		import { Color } from "./types/color.js"
-		import { ErisConsole } from "./utils/eris_console.js"
+		import { Scene, GameObject, TriangleMesh, StandardMaterial, Renderer, ErisConsole } from "./eris_index.js"
 
-		Eris.start()
-		Renderer.start()
+		class Triangle extends GameObject {
+			constructor() {
+				super(new TriangleMesh(), new StandardMaterial())
+			}
+
+			onLoad() {
+				ErisConsole.log("Triangle Loaded Successfully")
+			}
+		}
 
 		class World extends Scene {
 			constructor() {
 				super()
-				const triangle = new GameObject(new TriangleMesh(), new StandardMaterial())
-				
-				ErisConsole.log(JSON.stringify(triangle))
-				this.addObjects([ triangle ])	
+				this.addObjects([ new Triangle() ])	
 			}
 
-			onUpate(deltaTime) {}
-			onDraw(deltaTime) {} 
+			onLoad() {
+				ErisConsole.log("World Scene Loaded Successfully")
+			}
 		}
 		
 		Renderer.render(new World())

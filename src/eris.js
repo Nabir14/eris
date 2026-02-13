@@ -2,12 +2,9 @@ export class Eris {
 	static {
 		this.version = "1.0.0"
 		this.author = "Nabir14"
-		this.canvas = null
 		this.canvasWidth = window.innerWidth
 		this.canvasHeight = window.innerHeight
-	}
-	
-	static start() {
+
 		this.canvas = document.createElement('canvas')
 
 		document.body.appendChild(this.canvas)
