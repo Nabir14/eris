@@ -29,10 +29,10 @@ export class GameObject extends ObjectTemplate {
 		
 		switch(camera.type) {
 			case CameraType.ORTHOGRAPHIC:
-				mat4.ortho(projection, 0, camera.width, 0, camera.height, camera.renderDistance, camera.near)
+				mat4.ortho(projection, 0, camera.width, 0, camera.height,  camera.near, camera.renderDistance)
 				break
 			case CameraType.PERSPECTIVE:
-				mat4.perspective(projection, camera.fov, Renderer.context.canvas.width / Renderer.context.canvas.height, camera.renderDistance, camera.near)
+				mat4.perspective(projection, camera.fov, Renderer.context.canvas.width / Renderer.context.canvas.height, camera.near, camera.renderDistance)
 				break
 			default:
 				ErisConsole.error("Unkown Camera Type -> (GameObject)")

@@ -33,7 +33,8 @@ export class Renderer {
 				scene.clearColor.a
 			)
 			
-			Renderer.context.clear(Renderer.context.COLOR_BUFFER_BIT)
+			Renderer.context.enable(Renderer.context.DEPTH_TEST)
+			Renderer.context.clear(Renderer.context.COLOR_BUFFER_BIT | Renderer.context.DEPTH_BUFFER_BIT)
 			
 			if (typeof scene.onDraw === 'function') { scene.onDraw(this.deltaTime) }
 

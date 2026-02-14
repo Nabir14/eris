@@ -12,7 +12,7 @@ import { MaterialTemplate } from "./templates/material_template.js"
 import { Scene } from "./scene.js"
 
 // Components
-import { TriangleMesh } from "./mesh.js"
+import { TriangleMesh, PlaneMesh } from "./mesh.js"
 import { StandardMaterial } from "./material.js"
 import { Color } from "./types/color.js"
 
@@ -34,6 +34,7 @@ export {
     MaterialTemplate,
     Scene,
     TriangleMesh,
+    PlaneMesh,
     Color, 
     StandardMaterial,
     GameObject, 

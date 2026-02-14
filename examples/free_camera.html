@@ -6,7 +6,7 @@
         </head>
         <body>
         <script type="module">
-		import { Scene, GameObject, TriangleMesh, StandardMaterial, Renderer, ErisConsole, PerspectiveCamera } from "./eris_index.js"
+		import { Scene, GameObject, TriangleMesh, PlaneMesh, StandardMaterial, Renderer, ErisConsole, PerspectiveCamera } from "./eris_index.js"
 
 		class Triangle extends GameObject {
 			constructor(scene) {
@@ -27,9 +27,15 @@
 				super()
 
                 this.camera = new PerspectiveCamera(65.)
+                this.ground = new GameObject(this, new PlaneMesh(), new StandardMaterial())
+                this.triangle = new Triangle(this)
+
+                this.ground.position[1] -= 1.
                 this.camera.position[2] -= 3.
+                
                 this.setActiveCamera(this.camera)
-				this.addObjects([ new Triangle(this) ])	
+
+				this.addObjects([ this.ground, this.triangle ])	
 			}
 
 			onLoad() {
