@@ -1,2 +1,2 @@
-# eris-game-engine
+# Eris
 A 3D Game Engine
