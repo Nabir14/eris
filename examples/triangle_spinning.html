@@ -1,24 +1,35 @@
 <!DOCTYPE html>
 <html>
         <head>
-                <title>Eris Triangle Example</title>
+                <title>Eris Triangle Spinning Example</title>
 				<link rel="stylesheet" href="style.css">
         </head>
         <body>
         <script type="module">
 		import { Scene, GameObject, TriangleMesh, StandardMaterial, Renderer, ErisConsole } from "./eris_index.js"
 
+		class Triangle extends GameObject {
+			constructor() {
+				super(new TriangleMesh(), new StandardMaterial())
+			}
+
+			onLoad() {
+				ErisConsole.log("Triangle Loaded Successfully")
+			}
+
+			onUpdate(deltaTime) {
+				this.rotation[1] += .1 * deltaTime
+			}
+		}
+
 		class World extends Scene {
 			constructor() {
 				super()
-
-				const Triangle = new GameObject(new TriangleMesh(), new StandardMaterial())
-				this.addObjects([ Triangle ])	
+				this.addObjects([ new Triangle() ])	
 			}
 
 			onLoad() {
 				ErisConsole.log("World Scene Loaded Successfully")
-				ErisConsole.log("Triangle Loaded Successfully")
 			}
 		}
 		

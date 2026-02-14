@@ -1,4 +1,4 @@
-import { MeshTemplate } from "./templates/mesh_template";
+import { MeshTemplate } from "./templates/mesh_template.js";
 
 export class TriangleMesh extends MeshTemplate {
 	constructor() {

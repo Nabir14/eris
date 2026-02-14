@@ -2,15 +2,16 @@ export class Eris {
 	static {
 		this.version = "1.0.0"
 		this.author = "Nabir14"
-		this.canvasWidth = window.innerWidth
-		this.canvasHeight = window.innerHeight
 
 		this.canvas = document.createElement('canvas')
 
 		document.body.appendChild(this.canvas)
+
+		Eris.resizeCanvas(window.innerWidth, window.innerHeight)
 		
-		this.canvas.width = this.canvasWidth
-		this.canvas.height = this.canvasHeight
+		window.addEventListener('resize', () => {
+			Eris.resizeCanvas(window.innerWidth, window.innerHeight)
+		});
 	}
 	
 	static resizeCanvas(width, height) {

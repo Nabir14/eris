@@ -1,5 +1,5 @@
-import { Renderer } from './renderer.js'
-import { ErisConsole } from './utils/eris_console.js'
+import { Renderer } from '/renderer.js'
+import { ErisConsole } from '/utils/eris_console.js'
 
 export class MaterialTemplate {
 	constructor(vertexShaderSource, fragmentShaderSource) {

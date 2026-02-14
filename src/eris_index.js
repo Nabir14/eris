@@ -1,14 +1,40 @@
+// Systems
 import { Eris } from "./eris.js"
 import { Renderer } from "./renderer.js"
+
+// Templates
+import { ScriptTemplate } from "./templates/script_template.js"
+import { ObjectTemplate } from "./templates/object_template.js"
+import { MeshTemplate } from "./templates/mesh_template.js"
+import { MaterialTemplate } from "./templates/material_template.js"
+
+// Top-level Container
 import { Scene } from "./scene.js"
-import { EmptyMesh } from "./mesh.js"
+
+// Components
 import { TriangleMesh } from "./mesh.js"
-import { EmptyMaterial } from "./material.js"
 import { StandardMaterial } from "./material.js"
-import { EmptyObject } from "./templates/object_template.js"
+import { Color } from "./types/color.js"
+
+// Entities
 import { GameObject } from "./game_object.js"
 import { Camera } from "./camera.js"
-import { Color } from "./types/color.js"
+
+// Others
 import { ErisConsole } from "./utils/eris_console.js"
 
-export { Eris, Renderer, Scene, EmptyMesh, TriangleMesh, EmptyMaterial, StandardMaterial, EmptyObject, GameObject, Camera, Color, ErisConsole}
+export { 
+    Eris,
+    Renderer,
+    ScriptTemplate,
+    ObjectTemplate,
+    MeshTemplate,
+    MaterialTemplate,
+    Scene,
+    TriangleMesh,
+    Color, 
+    StandardMaterial,
+    GameObject, 
+    Camera, 
+    ErisConsole
+}

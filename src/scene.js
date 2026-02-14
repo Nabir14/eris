@@ -3,6 +3,8 @@ import { Color } from './types/color.js'
 
 export class Scene extends ScriptTemplate {
 	constructor() {
+		super()
+		
 		this.clearColor = new Color(0, 0, 0, 1)
 		this.activeCamera = null
 		this.objects = []
