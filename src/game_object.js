@@ -1,7 +1,7 @@
 import { ObjectTemplate } from './templates/object_template.js'
 import { CameraType } from './camera.js'
 import { ErisConsole } from './utils/eris_console.js'
-import { glMatrix, mat4 } from './glMatrix/index.js'
+import { glMatrix, mat4, vec3 } from './glMatrix/index.js'
 import { Renderer } from './renderer.js'
 
 export class GameObject extends ObjectTemplate {
@@ -13,6 +13,8 @@ export class GameObject extends ObjectTemplate {
 	}
 
 	_processDefault() {
+		Renderer.context.useProgram(this.material.shaderProgram)
+
 		let model = mat4.create()
 		let view = mat4.create()
 		let projection = mat4.create()
@@ -25,7 +27,11 @@ export class GameObject extends ObjectTemplate {
 
 		const camera = this.parentScene.getActiveCamera()
 		
-		mat4.translate(view, view, camera.position)
+		let cameraForwardDir = vec3.fromValues(0., 0., -1.)
+		let lookDir = vec3.create()
+		vec3.add(lookDir, camera.position, cameraForwardDir)
+		
+		mat4.lookAt(view, camera.position, lookDir, vec3.fromValues(0., 1., 0.))
 		
 		switch(camera.type) {
 			case CameraType.ORTHOGRAPHIC:

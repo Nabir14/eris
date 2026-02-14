@@ -43,14 +43,12 @@ export class Renderer {
 				const material = object.material
 
 				if (typeof object.onUpdate === 'function') { object.onUpdate(this.deltaTime) }
+				object._processDefault()
 
 				if (mesh && material) {
 					if (typeof object.onDraw === 'function') { object.onDraw(this.deltaTime) }
 
 					Renderer.context.useProgram(material.shaderProgram)
-
-					object._processDefault()
-
 					Renderer.context.bindVertexArray(mesh.vao)
 					Renderer.context.drawArrays(Renderer.context.TRIANGLES, 0, mesh.vertices.length / 3)
 				}

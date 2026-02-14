@@ -36,11 +36,11 @@
                 this.ground.scale[2] = 2.
                 this.ground.material.setColor(new Color(0., 1., 0., 1.))
                 this.ground.position[1] -= 1.
-                this.camera.position[2] -= 3.
+                this.camera.position[2] = 3.
 
                 this.setActiveCamera(this.camera)
 
-				this.addObjects([ this.ground, this.triangle ])	
+				this.addObjects([ this.ground, this.triangle, this.camera ])	
 			}
 
 			onLoad() {
