@@ -1,5 +1,5 @@
-import { vec3 } from '/glMatrix/index.js'
-import { ScriptTemplate } from '/templates/script_template.js'
+import { vec3 } from '../glMatrix/index.js'
+import { ScriptTemplate } from './script_template.js'
 
 export class ObjectTemplate extends ScriptTemplate {
 	constructor() {
