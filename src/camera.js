@@ -1,8 +1,8 @@
 import { vec3 } from './glMatrix/index.js'
-import { EmptyObject } from './empty_object.js'
+import { ObjectTemplate } from './templates/object_template.js'
 import { Renderer } from './renderer.js'
 
-export class Camera extends EmptyObject {
+export class Camera extends ObjectTemplate {
 	constructor() {
 		this.position = new vec3(0., 0., 0.)
 		this.renderDistance = 1000.

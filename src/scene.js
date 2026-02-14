@@ -1,6 +1,7 @@
+import { ScriptTemplate } from './templates/script_template.js'
 import { Color } from './types/color.js'
 
-export class Scene {
+export class Scene extends ScriptTemplate {
 	constructor() {
 		this.clearColor = new Color(0, 0, 0, 1)
 		this.activeCamera = null
