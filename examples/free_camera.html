@@ -6,7 +6,8 @@
         </head>
         <body>
         <script type="module">
-		import { Scene, GameObject, TriangleMesh, PlaneMesh, StandardMaterial, Renderer, ErisConsole, PerspectiveCamera } from "./eris_index.js"
+		import { Scene, GameObject, TriangleMesh, PlaneMesh, Color, StandardMaterial, Renderer, ErisConsole, PerspectiveCamera } from "./eris_index.js"
+        import { vec3 } from './glMatrix/index.js'
 
 		class Triangle extends GameObject {
 			constructor(scene) {
@@ -30,9 +31,13 @@
                 this.ground = new GameObject(this, new PlaneMesh(), new StandardMaterial())
                 this.triangle = new Triangle(this)
 
+                this.triangle.material.setColor(new Color(1., 0., 0., 1.))
+                this.ground.scale[0] = 2.
+                this.ground.scale[2] = 2.
+                this.ground.material.setColor(new Color(0., 1., 0., 1.))
                 this.ground.position[1] -= 1.
                 this.camera.position[2] -= 3.
-                
+
                 this.setActiveCamera(this.camera)
 
 				this.addObjects([ this.ground, this.triangle ])	

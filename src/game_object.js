@@ -55,6 +55,21 @@ export class GameObject extends ObjectTemplate {
 			false,
 			projection
 		)
+		
+		if (this.material.color) {
+			Renderer.context.uniform3fv(
+				Renderer.context.getUniformLocation(this.material.shaderProgram, "uColor"),
+				new Float32Array([
+					this.material.color.r,
+					this.material.color.g,
+					this.material.color.b,
+				])
+			)
 
+			Renderer.context.uniform1f(
+				Renderer.context.getUniformLocation(this.material.shaderProgram, "uAlpha"),
+				this.material.color.a
+			)
+		}
 	}
 }

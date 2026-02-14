@@ -1,3 +1,4 @@
+import { Color } from './types/color.js'
 import { MaterialTemplate } from './templates/material_template.js'
 
 export class StandardMaterial extends MaterialTemplate {
@@ -16,12 +17,25 @@ export class StandardMaterial extends MaterialTemplate {
 		`, `#version 300 es
 			
 		precision mediump float;
-		
+
 		out vec4 FragColor;
 
+		uniform vec3 uColor;
+		uniform float uAlpha;
+
 		void main() {
-			FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+			FragColor = vec4(uColor, uAlpha);
 		}
 		`)
+
+		this.color = new Color(1., 1., 1., 1.)
+	}
+
+	setColor(color) {
+		this.color = color
+	}
+
+	getColor() {
+		return color
 	}
 }
