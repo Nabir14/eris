@@ -5,11 +5,13 @@ export class StandardMaterial extends MaterialTemplate {
 		super(`#version 300 es
 
 		layout (location = 0) in vec3 attributePosition;
-		uniform mat4 uTransform;
+		uniform mat4 uModel;
+		uniform mat4 uView;
+		uniform mat4 uProjection;
 
 
 		void main() {
-			gl_Position = uTransform * vec4(attributePosition, 1.0);
+			gl_Position = uProjection * uView * uModel * vec4(attributePosition, 1.0);
 		}
 		`, `#version 300 es
 			

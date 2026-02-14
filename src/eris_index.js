@@ -19,6 +19,8 @@ import { Color } from "./types/color.js"
 // Entities
 import { GameObject } from "./game_object.js"
 import { Camera } from "./camera.js"
+import { OrthographicCamera } from "./orthographic_camera.js"
+import { PerspectiveCamera } from "./perspective_camera.js"
 
 // Others
 import { ErisConsole } from "./utils/eris_console.js"
@@ -35,6 +37,8 @@ export {
     Color, 
     StandardMaterial,
     GameObject, 
-    Camera, 
+    Camera,
+    OrthographicCamera,
+    PerspectiveCamera,
     ErisConsole
 }

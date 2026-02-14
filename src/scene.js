@@ -18,6 +18,10 @@ export class Scene extends ScriptTemplate {
 		this.activeCamera = camera
 	}
 
+	getActiveCamera() {
+		return this.activeCamera
+	}
+
 	addObjects(objects_array) {
 		this.objects.push(...objects_array)
 	}

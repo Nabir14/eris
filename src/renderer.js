@@ -1,12 +1,11 @@
 import { Eris } from './eris.js'
 import { ErisConsole } from './utils/eris_console.js'
-import { glMatrix, mat4 } from './glMatrix/index.js'
 
 export class Renderer {
 	static {
 		this.context = Eris.canvas.getContext('webgl2')
 		this.deltaTime = 0.
-		
+
 		if (!this.context) {
 			ErisConsole.error("Unable To Get WebGL2 Context -> (Renderer)")
 		}
@@ -49,18 +48,7 @@ export class Renderer {
 
 					Renderer.context.useProgram(material.shaderProgram)
 
-					let transform = mat4.create()
-					mat4.translate(transform, transform, object.position)
-					mat4.rotateX(transform, transform, glMatrix.toRadian(object.rotation[0]))
-					mat4.rotateY(transform, transform, glMatrix.toRadian(object.rotation[1]))
-					mat4.rotateZ(transform, transform, glMatrix.toRadian(object.rotation[2]))
-					mat4.scale(transform, transform, object.scale)
-
-					Renderer.context.uniformMatrix4fv(
-						Renderer.context.getUniformLocation(material.shaderProgram, "uTransform"),
-						false,
-						transform
-					)
+					object._processDefault()
 
 					Renderer.context.bindVertexArray(mesh.vao)
 					Renderer.context.drawArrays(Renderer.context.TRIANGLES, 0, mesh.vertices.length / 3)

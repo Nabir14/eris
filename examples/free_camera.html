@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+        <head>
+                <title>Eris Free Camera Example</title>
+				<link rel="stylesheet" href="style.css">
+        </head>
+        <body>
+        <script type="module">
+		import { Scene, GameObject, TriangleMesh, StandardMaterial, Renderer, ErisConsole, PerspectiveCamera } from "./eris_index.js"
+
+		class Triangle extends GameObject {
+			constructor(scene) {
+				super(scene, new TriangleMesh(), new StandardMaterial())
+			}
+
+			onLoad() {
+				ErisConsole.log("Triangle Loaded Successfully")
+			}
+
+			onUpdate(deltaTime) {
+				this.rotation[1] += .1 * deltaTime
+			}
+		}
+
+		class World extends Scene {
+			constructor() {
+				super()
+
+                this.camera = new PerspectiveCamera(65.)
+                this.camera.position[2] -= 3.
+                this.setActiveCamera(this.camera)
+				this.addObjects([ new Triangle(this) ])	
+			}
+
+			onLoad() {
+				ErisConsole.log("World Scene Loaded Successfully")
+			}
+		}
+		
+		Renderer.render(new World())
+	</script>
+        </body>
+</html>
