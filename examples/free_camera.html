@@ -6,7 +6,7 @@
         </head>
         <body>
         <script type="module">
-		import { Scene, GameObject, TriangleMesh, PlaneMesh, Color, StandardMaterial, Renderer, ErisConsole, PerspectiveCamera } from "./eris_index.js"
+		import { Scene, GameObject, TriangleMesh, PlaneMesh, Color, StandardMaterial, Renderer, ErisConsole, PerspectiveCamera, Event } from "./eris_index.js"
         import { vec3 } from './glMatrix/index.js'
 
 		class Triangle extends GameObject {
@@ -45,6 +45,35 @@
 
 			onLoad() {
 				ErisConsole.log("World Scene Loaded Successfully")
+			}
+
+			onEvent(event) {}
+
+			onUpdate(deltaTime) {
+				if (Event.isKeyPressed("w")) {
+					this.camera.position[2] -= .1
+				}
+				if(Event.isKeyPressed("s")) {
+					this.camera.position[2] += .1
+				}
+				if(Event.isKeyPressed("a")) {
+					this.camera.position[0] -= .1
+				}
+				if(Event.isKeyPressed("d")) {
+					this.camera.position[0] += .1
+				}
+				if (Event.isKeyPressed("ArrowUp")) {
+					this.camera.rotation[0] += 1.
+				}
+				if(Event.isKeyPressed("ArrowDown")) {
+					this.camera.rotation[0] -= 1.
+				}
+				if(Event.isKeyPressed("ArrowLeft")) {
+					this.camera.rotation[1] -= 1.
+				}
+				if(Event.isKeyPressed("ArrowRight")) {
+					this.camera.rotation[1] += 1.
+				}
 			}
 		}
 		

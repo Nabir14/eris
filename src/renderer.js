@@ -1,5 +1,6 @@
 import { Eris } from './eris.js'
 import { ErisConsole } from './utils/eris_console.js'
+import { Event } from './event.js'
 
 export class Renderer {
 	static {
@@ -13,8 +14,6 @@ export class Renderer {
 
 	static render(scene) {
 		Renderer.context.viewport(0, 0, Renderer.context.canvas.width, Renderer.context.canvas.height)
-		
-		if (typeof scene.onLoad === 'function') { scene.onLoad() }
 
 		scene._processDefault()
 		

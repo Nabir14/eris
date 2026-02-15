@@ -27,18 +27,17 @@ export class GameObject extends ObjectTemplate {
 
 		const camera = this.parentScene.getActiveCamera()
 		
-		let cameraForwardDir = vec3.fromValues(0., 0., -1.)
 		let lookDir = vec3.create()
-		vec3.add(lookDir, camera.position, cameraForwardDir)
-		
-		mat4.lookAt(view, camera.position, lookDir, vec3.fromValues(0., 1., 0.))
+		vec3.add(lookDir, camera.position, camera.forwardDirection)
+
+		mat4.lookAt(view, camera.position, lookDir, camera.upDirection)
 		
 		switch(camera.type) {
 			case CameraType.ORTHOGRAPHIC:
 				mat4.ortho(projection, 0, camera.width, 0, camera.height,  camera.near, camera.renderDistance)
 				break
 			case CameraType.PERSPECTIVE:
-				mat4.perspective(projection, camera.fov, Renderer.context.canvas.width / Renderer.context.canvas.height, camera.near, camera.renderDistance)
+				mat4.perspective(projection, glMatrix.toRadian(camera.fov), Renderer.context.canvas.width / Renderer.context.canvas.height, camera.near, camera.renderDistance)
 				break
 			default:
 				ErisConsole.error("Unkown Camera Type -> (GameObject)")

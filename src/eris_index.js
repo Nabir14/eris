@@ -1,6 +1,7 @@
 // Systems
 import { Eris } from "./eris.js"
 import { Renderer } from "./renderer.js"
+import { Event } from "./event.js"
 
 // Templates
 import { ScriptTemplate } from "./templates/script_template.js"
@@ -28,6 +29,7 @@ import { ErisConsole } from "./utils/eris_console.js"
 export { 
     Eris,
     Renderer,
+    Event,
     ScriptTemplate,
     ObjectTemplate,
     MeshTemplate,

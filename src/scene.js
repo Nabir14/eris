@@ -1,5 +1,6 @@
 import { ScriptTemplate } from './templates/script_template.js'
 import { Color } from './types/color.js'
+import { Event } from './event.js'
 
 export class Scene extends ScriptTemplate {
 	constructor() {
@@ -27,12 +28,12 @@ export class Scene extends ScriptTemplate {
 	}
 	
 	_processDefault() {
+		this.onLoad()
+		Event.addCallback((event) => this.onEvent(event))
+
 		for (const object of this.objects) {
 			if (typeof object.onLoad === 'function') { object.onLoad() }
+			if (typeof object.onEvent === 'function') { Event.addCallback((event) => object.onEvent(event)) }
 		}
 	}
-
-	onLoad() {}
-	onUpdate(deltaTime) {}
-	onDraw(deltaTime) {}
 }
